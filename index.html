@@ -3,346 +3,280 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎯 靶心人公式 - 全類型故事 AI 產生器</title>
-  <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-  <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+  <title>🎯 靶心人公式 - 全能故事 AI 創作神器</title>
   <style>
-    body { background-color: #f0f4f9; font-family: system-ui, -apple-system, sans-serif; }
-    .gemini-card { background: #ffffff; border-radius: 1.5rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); }
-    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    body { background: #f0f4f9; color: #1e293b; line-height: 1.5; padding: 15px; }
+    
+    .container { max-width: 960px; margin: 0 auto; }
+    
+    /* Header Card */
+    .header-card { 
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%); 
+      color: white; border-radius: 20px; padding: 25px 20px; text-align: center;
+      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); margin-bottom: 20px;
+    }
+    .header-card h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; }
+    .header-card p { font-size: 14px; opacity: 0.9; }
+
+    /* Section Card */
+    .card { background: white; border-radius: 18px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); margin-bottom: 20px; }
+    .card-title { font-size: 16px; font-weight: 700; color: #334155; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+
+    /* Genre Selector Grid */
+    .genre-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-bottom: 15px; }
+    .genre-btn {
+      background: #f1f5f9; border: 2px solid #e2e8f0; border-radius: 12px; padding: 10px 6px;
+      font-size: 13px; font-weight: 700; color: #475569; cursor: pointer; transition: all 0.2s ease;
+      text-align: center; user-select: none;
+    }
+    .genre-btn:hover { border-color: #818cf8; background: #eef2ff; color: #4f46e5; }
+    .genre-btn.active { background: #4f46e5; border-color: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
+
+    /* Action Buttons Area */
+    .action-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px; }
+    .btn-main {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white;
+      border: none; padding: 12px 28px; border-radius: 12px; font-size: 15px; font-weight: 800;
+      cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); transition: transform 0.1s ease;
+    }
+    .btn-main:active { transform: scale(0.98); }
+    .btn-main:disabled { background: #94a3b8; box-shadow: none; cursor: not-allowed; }
+    .btn-sub { background: #f1f5f9; border: 1px solid #cbd5e1; color: #475569; padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .btn-sub:hover { background: #e2e8f0; }
+
+    /* Input Steps Grid */
+    .steps-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 640px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
+    
+    .step-card { background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 12px; }
+    .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .step-name { font-size: 14px; font-weight: 800; color: #1e293b; }
+    .badge-req { background: #dbeafe; color: #1d4ed8; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 6px; }
+    .badge-opt { background: #fef3c7; color: #b45309; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 6px; }
+
+    textarea, input, select {
+      width: 100%; padding: 8px 10px; font-size: 12px; border: 1px solid #cbd5e1; border-radius: 8px;
+      outline: none; background: white; color: #334155; margin-bottom: 6px;
+    }
+    textarea:focus, input:focus, select:focus { border-color: #6366f1; box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2); }
+    textarea { resize: none; height: 50px; }
+
+    /* Results Table */
+    .table-container { overflow-x: auto; border-radius: 10px; border: 1px solid #e2e8f0; margin-top: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 600px; text-align: left; }
+    th { background: #0f766e; color: white; padding: 8px; font-weight: 700; border: 1px solid #0d9488; }
+    td { padding: 8px; border: 1px solid #e2e8f0; }
+
+    /* Story Box */
+    .story-text { background: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 12px; font-size: 14px; line-height: 1.8; color: #334155; white-space: pre-line; }
+    .prompt-box { background: #1e293b; color: #818cf8; padding: 12px; border-radius: 10px; font-family: monospace; font-size: 11px; word-break: break-all; }
+
+    .hidden { display: none; }
   </style>
 </head>
-<body class="min-h-screen p-4 md:p-8 text-slate-800">
-  <header class="max-w-5xl mx-auto mb-6 flex justify-between items-center px-2">
-    <div class="flex items-center gap-2 text-xl font-bold text-slate-700">
-      <span class="text-blue-600">🎯 靶心人公式．7 大故事類型 AI 產生器</span>
-    </div>
-  </header>
+<body>
 
-  <main class="max-w-5xl mx-auto gemini-card p-6 md:p-10 mb-10">
-    <div class="text-center mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold text-slate-800 tracking-tight mb-2">
-        🎯 靶心人公式 - 全類型故事學習單
-      </h1>
-      <p class="text-slate-500 text-sm md:text-base">
-        參考圖卡支援 **7 大故事類型**！選擇類型並填寫步驟 1~3（4~7 可留空），AI 將自動渲染專屬筆觸並推演故事！
-      </p>
-    </div>
+  <div class="container">
+    <!-- Header -->
+    <header class="header-card">
+      <h1>🎯 靶心人公式．萬能故事 AI 學習單</h1>
+      <p>點選故事類型 ➔ 填寫核心靈感 ➔ 一鍵生成精彩全文與彩虹試算表！</p>
+    </header>
 
-    <!-- 故事類型選擇器 -->
-    <div class="max-w-md mx-auto mb-6 bg-slate-100 p-3 rounded-2xl flex items-center gap-2 border border-slate-200">
-      <label class="text-xs font-bold text-slate-700 whitespace-nowrap flex items-center gap-1">
-        <i class="fa-solid fa-clapperboard text-blue-600"></i> 選擇故事類型：
-      </label>
-      <select id="genreSelect" class="w-full p-2 text-xs md:text-sm font-bold bg-white text-blue-700 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
-        <option value="奇幻與科幻">🧙‍♂️ 奇幻與科幻 (Fantasy & Sci-Fi)</option>
-        <option value="冒險與尋寶">🗺️ 冒險與尋寶 (Adventure & Quest)</option>
-        <option value="推理與懸疑">🔍 推理與懸疑 (Mystery & Thriller)</option>
-        <option value="恐怖與驚悚">👻 恐怖與驚悚 (Horror & Suspense)</option>
-        <option value="浪漫與愛情">❤️ 浪漫與愛情 (Romance)</option>
-        <option value="現實與劇情" selected>🎓 現實與劇情 (Realism & Drama / 升學與職場)</option>
-        <option value="喜劇與幽默">😂 喜劇與幽默 (Comedy / 反差萌)</option>
-      </select>
-    </div>
+    <!-- 1. Choose Genre -->
+    <section class="card">
+      <div class="card-title">📌 1. 選擇故事類型 (參考 7 大分類)</div>
+      <div class="genre-grid" id="genreGrid">
+        <div class="genre-btn" onclick="selectGenre(this, '奇幻與科幻')">🧙‍♂️ 1. 奇幻科幻</div>
+        <div class="genre-btn" onclick="selectGenre(this, '冒險與尋寶')">🗺️ 2. 冒險尋寶</div>
+        <div class="genre-btn" onclick="selectGenre(this, '推理與懸疑')">🔍 3. 推理懸疑</div>
+        <div class="genre-btn" onclick="selectGenre(this, '恐怖與驚悚')">👻 4. 恐怖驚悚</div>
+        <div class="genre-btn" onclick="selectGenre(this, '浪漫與愛情')">❤️ 5. 浪漫愛情</div>
+        <div class="genre-btn active" onclick="selectGenre(this, '現實與劇情')">🎓 6. 現實劇情</div>
+        <div class="genre-btn" onclick="selectGenre(this, '喜劇與幽默')">😂 7. 喜劇幽默</div>
+      </div>
+    </section>
 
-    <!-- 7 大情境一鍵載入按鈕區 -->
-    <div class="flex flex-wrap items-center justify-center gap-2 mb-8">
-      <button id="aiBtn" onclick="triggerBackendAIGeneration()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 rounded-xl text-xs md:text-sm shadow-md transition flex items-center gap-1.5">
-        <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
-        <span id="aiBtnText">✨ AI 智慧推演與生成全文</span>
-      </button>
+    <!-- 2. Form Inputs -->
+    <section class="card">
+      <div class="card-title">✏️ 2. 填寫故事 1~7 步驟素材</div>
+      <div class="steps-grid" id="stepsGrid"></div>
+    </section>
 
-      <button onclick="loadPreset('realism')" class="bg-amber-500 hover:bg-amber-600 text-white font-medium px-3 py-2 rounded-xl text-xs shadow-sm transition">🎓 1. 現實劇情</button>
-      <button onclick="loadPreset('scifi')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-3 py-2 rounded-xl text-xs shadow-sm transition">🧙‍♂️ 2. 奇幻科幻</button>
-      <button onclick="loadPreset('adventure')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-3 py-2 rounded-xl text-xs shadow-sm transition">🗺️ 3. 冒險尋寶</button>
-      <button onclick="loadPreset('mystery')" class="bg-slate-700 hover:bg-slate-800 text-white font-medium px-3 py-2 rounded-xl text-xs shadow-sm transition">🔍 4. 推理懸疑</button>
-      <button onclick="loadPreset('horror')" class="bg-stone-800 hover:bg-stone-900 text-white font-medium px-3 py-2 rounded-xl text-xs shadow-sm transition">👻 5. 恐怖驚悚</button>
-      <button onclick="loadPreset('romance')" class="bg-rose-500 hover:bg-rose-600 text-white font-medium px-3 py-2 rounded-xl text-xs shadow-sm transition">❤️ 6. 浪漫愛情</button>
-      <button onclick="loadPreset('comedy')" class="bg-orange-500 hover:bg-orange-600 text-white font-medium px-3 py-2 rounded-xl text-xs shadow-sm transition">😂 7. 喜劇幽默</button>
-
-      <button onclick="clearAllFields()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium px-3 py-2 rounded-xl text-xs">🧹 清除</button>
+    <!-- 3. Actions -->
+    <div class="action-bar">
+      <button class="btn-main" id="aiBtn" onclick="triggerBackendAIGeneration()">✨ AI 智慧推演與生成全文</button>
+      <button class="btn-sub" onclick="loadSelectedPreset()">📙 載入類型範例</button>
+      <button class="btn-sub" onclick="clearAllFields()">🧹 清除內容</button>
     </div>
 
-    <!-- 7 Step Inputs -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" id="stepsContainer"></div>
-  </main>
-
-  <!-- Results Section -->
-  <section id="attachmentSection" class="max-w-5xl mx-auto space-y-8 hidden mb-12">
-    <!-- 1. 彩虹情緒試算表 -->
-    <div class="gemini-card p-6 md:p-8">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-        <div>
-          <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-            <i class="fa-solid fa-table text-emerald-600"></i>
-            <span>彩虹情緒試算表預覽</span>
-          </h2>
-          <p class="text-xs text-slate-500">自動整理 7 步驟關鍵事件、內心感受與情緒區塊標記</p>
+    <!-- 4. Result Area -->
+    <div id="resultArea" class="hidden">
+      <!-- Rainbow Table -->
+      <section class="card">
+        <div class="card-title" style="justify-content: space-between;">
+          <span>📊 3. 彩虹情緒試算表預覽</span>
+          <div>
+            <button class="btn-sub" onclick="openGoogleSheetsWindow()">📊 另開 Google 試算表</button>
+            <button class="btn-sub" onclick="openPDFPrintWindow()">🖨️ 列印 PDF</button>
+          </div>
         </div>
-        <div class="flex flex-wrap gap-2">
-          <button onclick="openGoogleSheetsWindow()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-xl text-xs shadow-sm transition flex items-center gap-1.5">
-            <i class="fa-solid fa-file-excel"></i> 📊 另開 Google 試算表編輯/複製 (帶顏色)
-          </button>
-          <button onclick="openPDFPrintWindow()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-xl text-xs shadow-sm transition flex items-center gap-1.5">
-            <i class="fa-solid fa-file-pdf"></i> 🖨️ 預覽 / 列印 PDF 學習單
-          </button>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 80px;">步驟</th>
+                <th>關鍵事件</th>
+                <th>內心感受</th>
+                <th style="background:#059669; text-align:center;">+3 狂喜</th>
+                <th style="background:#10b981; text-align:center;">+2 期待</th>
+                <th style="background:#34d399; text-align:center;">+1 希望</th>
+                <th style="background:#6b7280; text-align:center;">0 平靜</th>
+                <th style="background:#f87171; text-align:center;">-1 不安</th>
+                <th style="background:#ef4444; text-align:center;">-2 沮喪</th>
+                <th style="background:#dc2626; text-align:center;">-3 絕望</th>
+              </tr>
+            </thead>
+            <tbody id="rainbowGridBody"></tbody>
+          </table>
         </div>
-      </div>
-      <div class="overflow-x-auto rounded-xl border border-slate-200 custom-scrollbar">
-        <table class="w-full text-left text-xs border-collapse min-w-[650px]">
-          <thead>
-            <tr class="bg-emerald-800 text-white font-bold">
-              <th class="p-3 w-24 border-r border-emerald-700">步驟</th>
-              <th class="p-3 w-48 border-r border-emerald-700">關鍵事件</th>
-              <th class="p-3 w-48 border-r border-emerald-700">內心感受</th>
-              <th class="p-3 text-center border-r border-emerald-700" style="background:#059669;">+3<br><span class="text-[9px]">狂喜</span></th>
-              <th class="p-3 text-center border-r border-emerald-700" style="background:#10b981;">+2<br><span class="text-[9px]">期待</span></th>
-              <th class="p-3 text-center border-r border-emerald-700" style="background:#34d399;">+1<br><span class="text-[9px]">希望</span></th>
-              <th class="p-3 text-center border-r border-emerald-700" style="background:#9ca3af;">0<br><span class="text-[9px]">平靜</span></th>
-              <th class="p-3 text-center border-r border-emerald-700" style="background:#f87171;">-1<br><span class="text-[9px]">不安</span></th>
-              <th class="p-3 text-center border-r border-emerald-700" style="background:#ef4444;">-2<br><span class="text-[9px]">沮喪</span></th>
-              <th class="p-3 text-center" style="background:#dc2626;">-3<br><span class="text-[9px]">絕望</span></th>
-            </tr>
-          </thead>
-          <tbody id="rainbowGridBody" class="divide-y divide-slate-200 bg-white"></tbody>
-        </table>
-      </div>
-    </div>
+      </section>
 
-    <!-- 2. 貫穿全文故事 -->
-    <div class="gemini-card p-6 md:p-8">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-          <i class="fa-solid fa-book-open text-blue-600"></i>
-          <span>7 步驟連貫故事全文</span>
-        </h2>
-        <button onclick="copyToClipboard('fullStoryText')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium px-3.5 py-2 rounded-xl shadow-sm">
-          <i class="fa-regular fa-copy"></i> 複製全文
-        </button>
-      </div>
-      <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-        <h3 id="storyTitle" class="text-base font-bold text-slate-800 mb-3 border-b pb-2">《故事名稱》</h3>
-        <div id="fullStoryText" class="text-sm text-slate-700 leading-relaxed whitespace-pre-line font-serif"></div>
-      </div>
-    </div>
-
-    <!-- 3. AI 中英文繪圖 Prompt -->
-    <div class="gemini-card p-6 md:p-8 space-y-4">
-      <div class="flex items-center justify-between">
-        <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-          <span>🎨</span>
-          <span>寫實風格 AI 繪圖提示詞 (Photorealistic Prompt)</span>
-        </h2>
-        <button onclick="copyToClipboard('promptText')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium px-3.5 py-2 rounded-xl shadow-sm">
-          <i class="fa-regular fa-copy"></i> 複製 Prompt
-        </button>
-      </div>
-      <div class="bg-blue-50 border border-blue-200 text-blue-800 p-3.5 rounded-xl text-xs leading-relaxed flex items-start gap-2">
-        <span class="text-base">💡</span>
-        <div>
-          <strong>如何生成包含「本人」的故事主角劇照？</strong><br>
-          前往 ChatGPT / Midjourney 繪圖時，先點擊 <b>「+ 上傳你的個人照片」</b>，再複製貼上這段提示詞，AI 就能以你的外貌生成專屬劇照！
+      <!-- Story Full Text -->
+      <section class="card">
+        <div class="card-title" style="justify-content: space-between;">
+          <span>📖 4. 故事全文自述</span>
+          <button class="btn-sub" onclick="copyToClipboard('fullStoryText')">📋 複製全文</button>
         </div>
-      </div>
-      <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
-        <div id="promptText" class="font-mono text-xs text-blue-600 bg-white p-4 rounded-xl border border-slate-200 shadow-inner"></div>
-        <p id="promptTranslation" class="text-xs text-slate-500 italic"></p>
-      </div>
+        <h3 id="storyTitle" style="font-size: 16px; color: #4338ca; margin-bottom: 8px;">《故事標題》</h3>
+        <div id="fullStoryText" class="story-text"></div>
+      </section>
+
+      <!-- AI Prompt -->
+      <section class="card">
+        <div class="card-title" style="justify-content: space-between;">
+          <span>🎨 5. 寫實風格 AI 繪圖提示詞 (Prompt)</span>
+          <button class="btn-sub" onclick="copyToClipboard('promptText')">📋 複製 Prompt</button>
+        </div>
+        <p style="font-size: 11px; color: #64748b; margin-bottom: 8px;">💡 先上傳個人照片給 ChatGPT / Midjourney，再貼上此提示詞即可生成包含你外貌特徵的專屬劇照！</p>
+        <div id="promptText" class="prompt-box"></div>
+        <p id="promptTranslation" style="font-size: 12px; color: #64748b; margin-top: 6px; font-style: italic;"></p>
+      </section>
     </div>
-  </section>
+  </div>
 
   <script>
-    const GAS_API_URL = "[https://script.google.com/macros/s/AKfycbxpnWemtY7jzRo136V8H9f1DFKFc69TTJ4LS8Jilllulub28TtquE68fqHzKcT6_qDj0A/exec)"; 
-    
+    // 🔗 請貼上您最新部署、存取權限改為「所有人」的 Google Apps Script 網頁應用程式網址！
+    const GAS_API_URL = "[https://script.google.com/macros/s/AKfycbxpnWemtY7jzRo136V8H9f1DFKFc69TTJ4LS8Jilllulub28TtquE68fqHzKcT6_qDj0A/exec](https://script.google.com/macros/s/AKfycbzFCFJ7DH6hqWHUmfVq7hocVNiCQJFjqJHI_n3uy8g1lRoEv_vXUmLVMdsEThsnjKQ5/exec)";
+
+    let currentGenre = "現實與劇情";
+
     const stepsData = [
-      { id: 1, name: "1. 目標 (Goal)", isReq: true, pE: "例如：考上慶應 / 尋找古代魔法聖杯 / 完美完成黑道家務", pF: "例如：熱血期待，充滿決心", defS: "3" },
-      { id: 2, name: "2. 阻礙 (Obstacle)", isReq: true, pE: "例如：偏差值30 / 守護巨龍襲擊 / 遇到會咬人的超強家塵", pF: "例如：挫折恐慌，壓力巨大", defS: "-2" },
-      { id: 3, name: "3. 努力 (Effort)", isReq: true, pE: "例如：苦讀至深夜 / 研讀古代魔法咒語 / 拿起極細抹布仔細打掃", pF: "例如：踏實專注，一步一腳印", defS: "1" },
-      { id: 4, name: "4. 結果 (Result)", isReq: false, pE: "可自行填寫或由 AI 動態推演創作", pF: "內心感受（選填）", defS: "2" },
-      { id: 5, name: "5. 意外 (Accident)", isReq: false, pE: "可自行填寫或由 AI 動態推演創作", pF: "內心感受（選填）", defS: "-3" },
-      { id: 6, name: "6. 轉彎 (Twist)", isReq: false, pE: "可自行填寫或由 AI 動態推演創作", pF: "內心感受（選填）", defS: "1" },
-      { id: 7, name: "7. 結局 (Ending)", isReq: false, pE: "可自行填寫或由 AI 動態推演創作", pF: "內心感受（選填）", defS: "3" }
+      { id: 1, name: "1. 目標 (Goal)", req: true, pE: "例如：考上慶應 / 尋找古代魔法聖杯", pF: "熱血期待，充滿決心", defS: "3" },
+      { id: 2, name: "2. 阻礙 (Obstacle)", req: true, pE: "例如：偏差值僅30 / 守護巨龍襲擊", pF: "沮喪挫折，壓力巨大", defS: "-2" },
+      { id: 3, name: "3. 努力 (Effort)", req: true, pE: "例如：苦讀至深夜 / 研讀古代魔法咒語", pF: "踏實專注，一步一腳印", defS: "1" },
+      { id: 4, name: "4. 結果 (Result)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "2" },
+      { id: 5, name: "5. 意外 (Accident)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "-3" },
+      { id: 6, name: "6. 轉灣 (Twist)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "1" },
+      { id: 7, name: "7. 結局 (Ending)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "3" }
     ];
 
     const emotionOptions = [
-      { v: "3", t: "3 (狂喜/自信)" },
-      { v: "2", t: "2 (期待/振奮)" },
-      { v: "1", t: "1 (希望/踏實)" },
-      { v: "0", t: "0 (平靜/沉著)" },
-      { v: "-1", t: "-1 (不安/焦慮)" },
-      { v: "-2", t: "-2 (沮喪/挫折)" },
-      { v: "-3", t: "-3 (絕望/崩潰)" }
+      { v: "3", t: "+3 狂喜" }, { v: "2", t: "+2 期待" }, { v: "1", t: "+1 希望" },
+      { v: "0", t: " 0 平靜" }, { v: "-1", t: "-1 不安" }, { v: "-2", t: "-2 沮喪" }, { v: "-3", t: "-3 絕望" }
     ];
 
     const emotionColorMap = {
-      "3": "#059669",
-      "2": "#10b981",
-      "1": "#34d399",
-      "0": "#9ca3af",
-      "-1": "#f87171",
-      "-2": "#ef4444",
-      "-3": "#dc2626"
+      "3": "#059669", "2": "#10b981", "1": "#34d399", "0": "#9ca3af",
+      "-1": "#f87171", "-2": "#ef4444", "-3": "#dc2626"
     };
 
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    }
-
-    function renderCards() {
-      document.getElementById('stepsContainer').innerHTML = stepsData.map(s => `
-        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="font-bold text-slate-800 text-sm md:text-base">${s.name}</h3>
-            ${s.isReq ? '<span class="text-[11px] bg-blue-100 text-blue-600 px-2 py-0.5 rounded">必填輸入</span>' : '<span class="text-[11px] bg-amber-100 text-amber-600 px-2 py-0.5 rounded">可填/AI推演</span>'}
+    function renderForm() {
+      const grid = document.getElementById('stepsGrid');
+      grid.innerHTML = stepsData.map(s => `
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-name">${s.name}</span>
+            ${s.req ? '<span class="badge-req">必填</span>' : '<span class="badge-opt">選填/AI推演</span>'}
           </div>
-          <div class="space-y-3">
-            <textarea id="event_${s.id}" rows="2" placeholder="${s.pE}" class="w-full p-3 text-xs bg-slate-50/50 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 resize-none custom-scrollbar"></textarea>
-            <div class="flex gap-2">
-              <input id="feeling_${s.id}" type="text" placeholder="${s.pF}" class="w-2/3 p-2.5 text-xs bg-slate-50/50 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500">
-              <select id="scale_${s.id}" class="w-1/3 p-2.5 text-xs bg-slate-50/50 rounded-xl border border-slate-200 font-medium">
-                ${emotionOptions.map(o => `<option value="${o.v}" ${o.v === s.defS ? 'selected' : ''}>${o.t}</option>`).join('')}
-              </select>
-            </div>
+          <textarea id="event_${s.id}" placeholder="${s.pE}"></textarea>
+          <div style="display:flex; gap:6px;">
+            <input id="feeling_${s.id}" type="text" placeholder="${s.pF}" style="width:60%;">
+            <select id="scale_${s.id}" style="width:40%;">
+              ${emotionOptions.map(o => `<option value="${o.v}" ${o.v === s.defS ? 'selected' : ''}>${o.t}</option>`).join('')}
+            </select>
           </div>
         </div>
       `).join('');
     }
 
-    // 🌟 7 大故事類型預設範例
+    function selectGenre(el, genre) {
+      document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      currentGenre = genre;
+    }
+
     const presets = {
-      realism: [
+      "現實與劇情": [
         { id: 1, e: "立下考上慶應大學與目標高中第一志願。", f: "熱血期待，充滿決心。", s: "3" },
         { id: 2, e: "成績墊底、偏差值僅 30，遭班導師冷眼嘲笑不看好。", f: "沮喪自卑，體會到被看輕的挫折。", s: "-2" },
-        { id: 3, e: "剪短髮戒手遊，天天在補習班苦讀刷題至深夜。", f: "踏實專注，一步一腳印。", s: "1" },
-        { id: 4, e: "模擬考成績大幅進步衝到前段班！", f: "振奮狂喜，重新建立信心。", s: "2" },
-        { id: 5, e: "考前模擬考重挫跌回 E 判定谷底，壓力過大身心交瘁。", f: "崩潰絕望，懷疑努力皆是徒勞。", s: "-3" },
-        { id: 6, e: "媽媽溫暖陪伴與老師「有志者事竟成」信件，重拾信仰。", f: "獲得力量，找回沉著自信。", s: "1" },
-        { id: 7, e: "放榜喜獲錄取！搭車時看見老師在月台上跳躍加油。", f: "感動落淚，充滿狂喜與自信。", s: "3" }
+        { id: 3, e: "剪短髮戒手遊，天天在補習班苦讀刷題至深夜。", f: "踏實專注，一步一腳印。", s: "1" }
       ],
-      scifi: [
+      "奇幻與科幻": [
         { id: 1, e: "前往星系邊緣的魔法遺跡解開失落的元素符文法則。", f: "震撼好奇，充滿探索壯志。", s: "3" },
         { id: 2, e: "古老守護者釋放高階黑魔法與反重力能量防護罩阻擋。", f: "受挫驚恐，陷入困局。", s: "-2" },
-        { id: 3, e: "結合現代科技微晶片與古代詠唱咒語進行共振突破。", f: "專注冷靜，奮力嘗試。", s: "1" },
-        { id: 4, e: "防護罩破裂，符文成功解開並釋放出熾熱藍光！", f: "備受鼓舞，看見希望。", s: "2" },
-        { id: 5, e: "遺跡核心突觸發自爆機制，反物質能量迅速過載撕裂空間。", f: "絕望萬分，生死一瞬。", s: "-3" },
-        { id: 6, e: "發現符文暗藏的時空傳送門，果斷引導能量注入傳送陣。", f: "絕境反擊，臨危不亂。", s: "1" },
-        { id: 7, e: "安全降落新世界，手中聖物散發著拯救文明的璀璨光芒！", f: "狂喜激動，浩瀚壯舉成就。", s: "3" }
+        { id: 3, e: "結合現代科技微晶片與古代詠唱咒語進行共振突破。", f: "專注冷靜，奮力嘗試。", s: "1" }
       ],
-      adventure: [
-        { id: 1, e: "深入迷霧森林尋找消失百年的太陽神阿茲特克黃金面具。", f: "勇敢熱血，準備踏上驚險之旅。", s: "3" },
-        { id: 2, e: "踏入沼澤區突遭巨型沼澤蟒蛇包圍，地圖與指南針掉入泥流。", f: "驚恐焦慮，失去方向。", s: "-2" },
-        { id: 3, e: "靠星宿位置辨識方位，並利用周遭植物製作防蛇薰香。", f: "堅韌踏實，不屈不撓。", s: "1" },
-        { id: 4, e: "穿過沼澤，成功發現隱藏在瀑布後方的黃金神廟入口！", f: "振奮狂喜，曙光乍現。", s: "2" },
-        { id: 5, e: "取走面具時觸發地底流沙 traps，神廟頂部開始坍塌崩落。", f: "命懸一線，極度絕望。", s: "-3" },
-        { id: 6, e: "運用探險繩索抓住石柱飛躍，順著瀑布水流躍入深潭。", f: "死裡逃生，展現極限勇氣。", s: "1" },
-        { id: 7, e: "高舉黃金面具站在陽光下，完成歷史性偉大探險冒險！", f: "歡呼狂喜，成為傳奇探險家。", s: "3" }
-      ],
-      mystery: [
-        { id: 1, e: "偵破古堡連環密室失蹤案，為被害者洗清冤屈並還原真相。", f: "冷靜敏銳，尋求正義。", s: "3" },
-        { id: 2, e: "現場證據遭毀滅，嫌疑人皆擁有完美的不在場證明。", f: "陷入僵局，毫無頭緒。", s: "-2" },
-        { id: 3, e: "用放大鏡重新勘驗現場積塵與牆上油畫的微小光影差異。", f: "細心嚴謹，不放過任何蛛絲馬跡。", s: "1" },
-        { id: 4, e: "發現暗門機制與一封藏在機關內的關鍵隱形墨水密信！", f: "眼前一亮，破解第一重謎團。", s: "2" },
-        { id: 5, e: "關鍵證人在開庭前夕遭神秘黑影襲擊昏迷，線索中斷。", f: "挫敗沉痛，感覺對手陰險。", s: "-3" },
-        { id: 6, e: "在懷錶機芯內找到真正的兇手指紋與雙重密室心理陷阱設計。", f: "自信反擊，鎖定真兇。", s: "1" },
-        { id: 7, e: "警局大廳公開拆穿真兇面具，密室真相大白，正義得到伸張！", f: "充滿成就感，榮耀落幕。", s: "3" }
-      ],
-      horror: [
-        { id: 1, e: "在廢棄精神病院驚悚「怪物牢籠」中尋找出口順利逃生。", f: "恐懼顫抖，誓言活著離開。", s: "3" },
-        { id: 2, e: "走廊燈光熄滅，身後傳來鎖鏈拖行與異形怪物低沉的咆哮聲。", f: "極度驚恐，心跳加速至極限。", s: "-2" },
-        { id: 3, e: "屏住呼吸躲在鐵櫃中，利用手電筒紅外線觀察怪物巡邏規律。", f: "顫抖專注，強壓內心恐懼。", s: "1" },
-        { id: 4, e: "成功拿到院長室的緊急逃生門磁卡！", f: "看見一線生機，奮力奔跑。", s: "2" },
-        { id: 5, e: "逃生門密碼鎖遭破壞，怪物破牆而出鎖定目標咆哮衝來。", f: "絕望崩潰，感受死亡逼近。", s: "-3" },
-        { id: 6, e: "將高壓電滅火器砸向水瓶觸發高壓電擊，暫時癱瘓怪物腿部。", f: "絕境求生，爆發極限潛能。", s: "1" },
-        { id: 7, e: "撞開大門奔向晨曦森林，背後廢棄古堡在黎明中歸於平靜！", f: "劫後餘生，放聲大哭與慶幸。", s: "3" }
-      ],
-      romance: [
-        { id: 1, e: "跨越貴族與平民階級隔閡，在宮廷晚宴向意中人坦承心意。", f: "深情浪漫，渴望真摯愛情。", s: "3" },
-        { id: 2, e: "家族安排政治聯姻阻撓，兩人被嚴令禁止再見面。", f: "痛苦糾葛，心碎萬分。", s: "-2" },
-        { id: 3, e: "透過秘密信鴿傳遞深情詩篇，並在月光下相約皇家花園。", f: "堅定不移，默默守護。", s: "1" },
-        { id: 4, e: "在舞會上共舞一曲，真摯情感打動了現場貴賓與親友！", f: "沉醉幸福，看見曙光。", s: "2" },
-        { id: 5, e: "婚約前夕國王降旨將其遠調邊境，離別之夜降下狂風暴雨。", f: "無奈絕望，淚水模糊視線。", s: "-3" },
-        { id: 6, e: "騎馬連夜奔馳追趕車隊，在邊境城堡前遞上一枚刻著名字的家傳戒指。", f: "勇敢無畏，誓言相隨。", s: "1" },
-        { id: 7, e: "國王被這份跨越階級的堅定愛戀感動，親自頒布祝福婚約！", f: "狂喜幸福，永遠相守。", s: "3" }
-      ],
-      comedy: [
+      "喜劇與幽默": [
         { id: 1, e: "凶狠黑道大哥因為賭局輸了，必須挑戰擔任全職家政夫一天。", f: "滿臉不爽但充滿極度自信。", s: "3" },
         { id: 2, e: "遇到會咬人且超頑固的油污，用圍裙配墨鏡打掃被小學生嘲笑。", f: "崩潰尷尬，極度傻眼。", s: "-2" },
-        { id: 3, e: "拿出砍人級別的殺氣，用超細小刷子與高壓蒸氣槍對油污開戰。", f: "殺氣騰騰，認真打掃。", s: "1" },
-        { id: 4, e: "廚房被清潔得閃閃發光，宛如五星級新飯店！", f: "成就感爆棚，爽快無比。", s: "2" },
-        { id: 5, e: "準備烤蛋糕時誤把地獄特級辣椒粉當成可可粉撒滿蛋糕。", f: "傻眼絕望，表情徹底失控。", s: "-3" },
-        { id: 6, e: "臨危不亂將辣味蛋糕改造成爆款「黑道魂暗黑特調辣味麻糬」。", f: "展現創意，反敗為勝。", s: "1" },
-        { id: 7, e: "鄰居太太們瘋狂排隊搶購，黑道大哥成為社區最強明星家政王！", f: "搞笑歡樂，全場爆笑好評。", s: "3" }
+        { id: 3, e: "拿出殺氣用超細小刷子與高壓蒸氣槍對油污開戰。", f: "殺氣騰騰，認真打掃。", s: "1" }
       ]
     };
 
-    function loadPreset(key) {
-      const genreNames = {
-        realism: "現實與劇情",
-        scifi: "奇幻與科幻",
-        adventure: "冒險與尋寶",
-        mystery: "推理與懸疑",
-        horror: "恐怖與驚悚",
-        romance: "浪漫與愛情",
-        comedy: "喜劇與幽默"
-      };
-
-      if (genreNames[key]) {
-        document.getElementById('genreSelect').value = genreNames[key];
-      }
-
-      const presetData = presets[key];
-      if (!presetData) return;
-
-      presetData.forEach(item => {
+    function loadSelectedPreset() {
+      const data = presets[currentGenre] || presets["現實與劇情"];
+      data.forEach(item => {
         document.getElementById(`event_${item.id}`).value = item.e;
         document.getElementById(`feeling_${item.id}`).value = item.f;
         document.getElementById(`scale_${item.id}`).value = item.s;
       });
-
-      renderRainbowGrid();
-      document.getElementById('attachmentSection').classList.remove('hidden');
-      document.getElementById('attachmentSection').scrollIntoView({ behavior: 'smooth' });
+      alert(`已載入【${currentGenre}】預設範例！`);
     }
 
     async function triggerBackendAIGeneration() {
-      const genre = document.getElementById('genreSelect').value;
       const e1 = document.getElementById('event_1').value.trim();
       const e2 = document.getElementById('event_2').value.trim();
       const e3 = document.getElementById('event_3').value.trim();
-      const e4 = document.getElementById('event_4').value.trim();
-      const e5 = document.getElementById('event_5').value.trim();
-      const e6 = document.getElementById('event_6').value.trim();
-      const e7 = document.getElementById('event_7').value.trim();
-      
+
       if (!e1 || !e2 || !e3) {
-        alert("請先完成步驟 1、2、3 的基礎想法再進行生成！");
+        alert("請先填寫步驟 1、2、3 的基礎靈感再進行生成！");
         return;
       }
-      
+
       const btn = document.getElementById('aiBtn');
-      const btnText = document.getElementById('aiBtnText');
       btn.disabled = true;
-      btnText.innerText = `🤖 AI 正在構思【${genre}】情節中...`;
+      btn.innerText = `🤖 AI 正在構思【${currentGenre}】故事中...`;
 
       try {
         const response = await fetch(GAS_API_URL, {
           method: 'POST',
           redirect: 'follow',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ 
-            genre: genre,
+          body: JSON.stringify({
+            genre: currentGenre,
             step1: e1, step2: e2, step3: e3,
-            step4: e4, step5: e5, step6: e6, step7: e7
+            step4: document.getElementById('event_4').value,
+            step5: document.getElementById('event_5').value,
+            step6: document.getElementById('event_6').value,
+            step7: document.getElementById('event_7').value
           })
         });
-        
+
         const data = await response.json();
-        if (!data.success) {
-          throw new Error(data.error || "後端 API 未回傳成功狀態");
-        }
-        
+        if (!data.success) throw new Error(data.error || "後端 API 未回傳成功");
+
         if (data.steps && Array.isArray(data.steps)) {
           data.steps.forEach(s => {
             if (document.getElementById(`event_${s.id}`)) {
@@ -352,22 +286,22 @@
             }
           });
         }
-        
+
         if (data.story_title) document.getElementById('storyTitle').innerText = data.story_title;
         if (data.full_story) document.getElementById('fullStoryText').innerText = data.full_story;
         if (data.prompt_en) document.getElementById('promptText').innerText = data.prompt_en;
         if (data.prompt_zh) document.getElementById('promptTranslation').innerText = data.prompt_zh;
-        
+
         renderRainbowGrid();
-        document.getElementById('attachmentSection').classList.remove('hidden');
-        document.getElementById('attachmentSection').scrollIntoView({ behavior: 'smooth' });
-        alert(`✨ 後端 Gemini AI 已依照【${genre}】風格創作成功！`);
+        document.getElementById('resultArea').classList.remove('hidden');
+        document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
+        alert(`✨ AI 成功為您推演【${currentGenre}】精采全文！`);
 
       } catch (err) {
-        alert("❌ 生成失敗：\n" + err.message);
+        alert("❌ 生成失敗：\n" + err.message + "\n\n💡 請檢查 Google Apps Script 部署權限是否已設定為『所有人』！");
       } finally {
         btn.disabled = false;
-        btnText.innerText = "✨ AI 智慧推演與生成全文";
+        btn.innerText = "✨ AI 智慧推演與生成全文";
       }
     }
 
@@ -375,127 +309,43 @@
       const tbody = document.getElementById('rainbowGridBody');
       const scales = ["3", "2", "1", "0", "-1", "-2", "-3"];
       tbody.innerHTML = '';
+
       for (let i = 1; i <= 7; i++) {
         const e = document.getElementById(`event_${i}`).value;
         const f = document.getElementById(`feeling_${i}`).value;
         const s = document.getElementById(`scale_${i}`).value;
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="p-3 font-bold border-r border-slate-200">${stepsData[i-1].name.split(' ')[1]}</td>
-          <td class="p-3 border-r border-slate-200">${escapeHtml(e)}</td>
-          <td class="p-3 border-r border-slate-200">${escapeHtml(f)}</td>
+          <td style="font-weight:bold;">${stepsData[i-1].name.split(' ')[1]}</td>
+          <td>${escapeHtml(e)}</td>
+          <td>${escapeHtml(f)}</td>
           ${scales.map(sc => {
             const isSelected = (sc === s);
             const bgStyle = isSelected ? `background-color: ${emotionColorMap[sc]}; color: white;` : '';
-            return `
-              <td class="p-3 text-center font-bold border-r border-slate-200" style="${bgStyle}">
-                ${isSelected ? '✓' : ''}
-              </td>
-            `;
+            return `<td style="text-align:center; font-weight:bold; ${bgStyle}">${isSelected ? '✓' : ''}</td>`;
           }).join('')}
         `;
         tbody.appendChild(tr);
       }
     }
 
-    function openGoogleSheetsWindow() {
-      const sheetsWindow = window.open('', '_blank');
-      let rowsHTML = '';
-      const scales = ["3", "2", "1", "0", "-1", "-2", "-3"];
+    function escapeHtml(str) { return str ? String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') : ''; }
+
+    function clearAllFields() {
       for (let i = 1; i <= 7; i++) {
-        const e = document.getElementById(`event_${i}`).value;
-        const f = document.getElementById(`feeling_${i}`).value;
-        const s = document.getElementById(`scale_${i}`).value;
-        rowsHTML += `
-          <tr>
-            <td style="padding:10px; border:1px solid #cbd5e1; font-weight:bold; background-color:#f1f5f9; color:#0f172a;">${stepsData[i-1].name}</td>
-            <td contenteditable="true" style="padding:10px; border:1px solid #cbd5e1; background-color:#ffffff; color:#334155;">${escapeHtml(e)}</td>
-            <td contenteditable="true" style="padding:10px; border:1px solid #cbd5e1; background-color:#ffffff; color:#334155;">${escapeHtml(f)}</td>
-            ${scales.map(sc => {
-              const isSelected = (sc === s);
-              const bgColor = isSelected ? emotionColorMap[sc] : '#ffffff';
-              const textColor = isSelected ? '#ffffff' : '#64748b';
-              return `
-                <td style="padding:10px; border:1px solid #cbd5e1; text-align:center; font-weight:bold; background-color:${bgColor}; color:${textColor}; font-size:14px;">
-                  ${isSelected ? '✓' : ''}
-                </td>
-              `;
-            }).join('')}
-          </tr>
-        `;
+        document.getElementById(`event_${i}`).value = '';
+        document.getElementById(`feeling_${i}`).value = '';
+        document.getElementById(`scale_${i}`).value = '0';
       }
-      sheetsWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>Google 試算表編輯版 - 我的故事創作單</title>
-          <style>
-            body { font-family: system-ui, -apple-system, sans-serif; margin: 20px; background-color: #f8fafc; }
-            .header { background-color: #0f766e; color: white; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 8px 8px 0 0; display:flex; justify-content:space-between; align-items:center; }
-            .btn-group { display: flex; gap: 8px; }
-            .btn { background: #ffffff; color: #0f766e; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px; }
-            .btn-green { background: #10b981; color: white; }
-            table { width: 100%; border-collapse: collapse; background-color: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-            th { padding: 10px; border: 1px solid #065f46; font-size: 12px; font-weight: bold; }
-            td { font-size: 13px; text-align: left; }
-            .tip { background: #e0f2fe; border: 1px solid #bae6fd; color: #0369a1; padding: 12px; border-radius: 8px; margin-bottom: 14px; font-size: 13px; line-height: 1.6; }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <span>📊 靶心人故事創作單 - 全彩 Google 試算表產出頁</span>
-            <div class="btn-group">
-              <button class="btn btn-green" onclick="copyRichTable()">📋 複製帶顏色表格 (貼上至 Google 試算表)</button>
-              <button class="btn" onclick="window.open('[https://sheet.new](https://sheet.new)', '_blank')">➕ 開啟 Google 試算表 (sheet.new)</button>
-            </div>
-          </div>
-          <div class="tip">
-            💡 <b>操作說明：</b><br>
-            1. 點擊「<b>📋 複製帶顏色表格</b>」，系統會自動將整張表格與<b>所有彩虹底色</b>複製入剪貼簿。<br>
-            2. 點擊「<b>➕ 開啟 Google 試算表</b>」，在 A1 格子直接按下 <b>Ctrl + V</b> 即可完整貼上！
-          </div>
-          <table id="rainbowTable">
-            <thead>
-              <tr style="background-color:#047857; color:#ffffff;">
-                <th style="width:120px; border:1px solid #065f46;">步驟</th>
-                <th style="border:1px solid #065f46;">關鍵事件 (可點擊編輯)</th>
-                <th style="border:1px solid #065f46;">內心感受 (可點擊編輯)</th>
-                <th style="background-color:#059669; text-align:center; border:1px solid #065f46;">'+3 狂喜</th>
-                <th style="background-color:#10b981; text-align:center; border:1px solid #065f46;">'+2 期待</th>
-                <th style="background-color:#34d399; color:#0f172a; text-align:center; border:1px solid #065f46;">'+1 希望</th>
-                <th style="background-color:#9ca3af; text-align:center; border:1px solid #065f46;">'0 平靜</th>
-                <th style="background-color:#f87171; text-align:center; border:1px solid #065f46;">'-1 不安</th>
-                <th style="background-color:#ef4444; text-align:center; border:1px solid #065f46;">'-2 沮喪</th>
-                <th style="background-color:#dc2626; text-align:center; border:1px solid #065f46;">'-3 絕望</th>
-              </tr>
-            </thead>
-            <tbody>${rowsHTML}</tbody>
-          </table>
-          <script>
-            function copyRichTable() {
-              const table = document.getElementById('rainbowTable');
-              const range = document.createRange();
-              range.selectNode(table);
-              const selection = window.getSelection();
-              selection.removeAllRanges();
-              selection.addRange(range);
-              try {
-                const successful = document.execCommand('copy');
-                selection.removeAllRanges();
-                if(successful) alert('✅ 全彩表格已成功複製！請在 Google 試算表 A1 儲存格按下 Ctrl + V。');
-              } catch (err) {
-                alert('❌ 複製失敗，請手動全選表格按 Ctrl + C。');
-              }
-            }
-          <\/script>
-        </body>
-        </html>
-      `);
-      sheetsWindow.document.close();
+      document.getElementById('resultArea').classList.add('hidden');
     }
 
-    function openPDFPrintWindow() {
-      const printWin = window.open('', '_blank');
+    function copyToClipboard(id) {
+      navigator.clipboard.writeText(document.getElementById(id).innerText).then(() => alert("已複製！"));
+    }
+
+    function openGoogleSheetsWindow() {
+      const sheetsWindow = window.open('', '_blank');
       let rowsHTML = '';
       const scales = ["3", "2", "1", "0", "-1", "-2", "-3"];
       for (let i = 1; i <= 7; i++) {
@@ -510,82 +360,56 @@
             ${scales.map(sc => {
               const isSelected = (sc === s);
               const bgColor = isSelected ? emotionColorMap[sc] : '#ffffff';
-              const textColor = isSelected ? '#ffffff' : '#000000';
-              return `
-                <td style="padding:8px; border:1px solid #ccc; text-align:center; font-weight:bold; background-color:${bgColor}; color:${textColor};">
-                  ${isSelected ? '✓' : ''}
-                </td>
-              `;
+              const textColor = isSelected ? '#ffffff' : '#64748b';
+              return `<td style="padding:8px; border:1px solid #ccc; text-align:center; font-weight:bold; background-color:${bgColor}; color:${textColor};">${isSelected ? '✓' : ''}</td>`;
             }).join('')}
           </tr>
         `;
       }
-      const titleText = document.getElementById('storyTitle').innerText;
-      const fullText = document.getElementById('fullStoryText').innerText;
+      sheetsWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head><title>Google 試算表編輯版</title></head>
+        <body style="font-family:sans-serif; padding:20px;">
+          <h3>📊 靶心人故事學習單 - 試算表複製頁</h3>
+          <button onclick="copyRichTable()" style="background:#10b981; color:white; border:none; padding:8px 16px; border-radius:6px; margin:10px 0; font-weight:bold; cursor:pointer;">📋 複製帶顏色表格</button>
+          <table id="rainbowTable" style="width:100%; border-collapse:collapse; background:white;">
+            <thead><tr style="background:#047857; color:white;"><th>步驟</th><th>關鍵事件</th><th>內心感受</th><th>+3</th><th>+2</th><th>+1</th><th>0</th><th>-1</th><th>-2</th><th>-3</th></tr></thead>
+            <tbody>${rowsHTML}</tbody>
+          </table>
+          <script>
+            function copyRichTable() {
+              const range = document.createRange();
+              range.selectNode(document.getElementById('rainbowTable'));
+              window.getSelection().removeAllRanges();
+              window.getSelection().addRange(range);
+              document.execCommand('copy');
+              alert('✅ 表格已複製！請在 Google 試算表 A1 貼上。');
+            }
+          <\/script>
+        </body>
+        </html>
+      `);
+      sheetsWindow.document.close();
+    }
+
+    function openPDFPrintWindow() {
+      const printWin = window.open('', '_blank');
       printWin.document.write(`
         <!DOCTYPE html>
         <html>
-        <head>
-          <title>${escapeHtml(titleText)} - 故事學習單列印檔</title>
-          <style>
-            body { font-family: system-ui, sans-serif; margin: 30px; color: #1e293b; }
-            .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0284c7; padding-bottom: 12px; margin-bottom: 20px; }
-            h1 { font-size: 20px; margin: 0; color: #0369a1; }
-            .btn-print { background: #0284c7; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; }
-            @media print { .btn-print { display: none; } }
-            table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 12px; }
-            th { background-color: #0369a1; color: white; padding: 8px; border: 1px solid #0284c7; }
-            .story-box { background: #f8fafc; border: 1px solid #cbd5e1; padding: 16px; border-radius: 8px; font-size: 13px; line-height: 1.8; whitespace-pre-line; }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <h1>🎯 靶心人公式 - 我的故事學習單</h1>
-            <button class="btn-print" onclick="window.print()">🖨️ 列印 / 另存為 PDF</button>
-          </div>
-          <h2 style="font-size:15px; margin-bottom:10px;">📊 一、彩虹情緒試算表</h2>
-          <table>
-            <thead>
-              <tr>
-                <th style="width:110px;">步驟</th>
-                <th>關鍵事件</th>
-                <th>內心感受</th>
-                <th style="background:#059669;">+3 狂喜</th>
-                <th style="background:#10b981;">+2 期待</th>
-                <th style="background:#34d399;">+1 希望</th>
-                <th style="background:#6b7280;">0 平靜</th>
-                <th style="background:#f87171;">-1 不安</th>
-                <th style="background:#ef4444;">-2 沮喪</th>
-                <th style="background:#dc2626;">-3 絕望</th>
-              </tr>
-            </thead>
-            <tbody>${rowsHTML}</tbody>
-          </table>
-          <h2 style="font-size:15px; margin-bottom:10px;">📖 二、故事全文自述</h2>
-          <div class="story-box">
-            <strong style="font-size:14px; color:#0f172a;">${escapeHtml(titleText)}</strong><br><br>
-            ${escapeHtml(fullText)}
-          </div>
+        <head><title>學習單列印檔</title></head>
+        <body style="font-family:sans-serif; padding:20px;">
+          <button onclick="window.print()" style="background:#4f46e5; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:bold; cursor:pointer;">🖨️ 列印 / 存為 PDF</button>
+          <h2>${document.getElementById('storyTitle').innerText}</h2>
+          <div style="white-space:pre-line; line-height:1.8; margin-top:15px;">${document.getElementById('fullStoryText').innerText}</div>
         </body>
         </html>
       `);
       printWin.document.close();
     }
 
-    function clearAllFields() {
-      for (let i = 1; i <= 7; i++) {
-        document.getElementById(`event_${i}`).value = '';
-        document.getElementById(`feeling_${i}`).value = '';
-        document.getElementById(`scale_${i}`).value = '0';
-      }
-      document.getElementById('attachmentSection').classList.add('hidden');
-    }
-
-    function copyToClipboard(id) {
-      navigator.clipboard.writeText(document.getElementById(id).innerText).then(() => alert("已複製！"));
-    }
-
-    window.onload = renderCards;
+    window.onload = renderForm;
   </script>
 </body>
 </html>
