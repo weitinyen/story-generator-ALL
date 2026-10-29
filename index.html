@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎯 靶心人公式 - 全能故事 AI 創作神器</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
     body { background: #f0f4f9; color: #1e293b; line-height: 1.5; padding: 15px; }
     
     .container { max-width: 960px; margin: 0 auto; }
@@ -16,60 +16,58 @@
       color: white; border-radius: 20px; padding: 25px 20px; text-align: center;
       box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); margin-bottom: 20px;
     }
-    .header-card h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; }
-    .header-card p { font-size: 14px; opacity: 0.9; }
+    .header-card h1 { font-size: 24px; font-weight: 800; margin-bottom: 6px; }
+    .header-card p { font-size: 13px; opacity: 0.95; }
 
-    /* Section Card */
+    /* Card Box */
     .card { background: white; border-radius: 18px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); margin-bottom: 20px; }
-    .card-title { font-size: 16px; font-weight: 700; color: #334155; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .card-title { font-size: 15px; font-weight: 700; color: #334155; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
 
     /* Genre Selector Grid */
-    .genre-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-bottom: 15px; }
+    .genre-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(125px, 1fr)); gap: 8px; margin-bottom: 10px; }
     .genre-btn {
       background: #f1f5f9; border: 2px solid #e2e8f0; border-radius: 12px; padding: 10px 6px;
-      font-size: 13px; font-weight: 700; color: #475569; cursor: pointer; transition: all 0.2s ease;
+      font-size: 12px; font-weight: 700; color: #475569; cursor: pointer; transition: all 0.2s ease;
       text-align: center; user-select: none;
     }
     .genre-btn:hover { border-color: #818cf8; background: #eef2ff; color: #4f46e5; }
     .genre-btn.active { background: #4f46e5; border-color: #4f46e5; color: white; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
 
-    /* Action Buttons Area */
+    /* Buttons */
     .action-bar { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px; }
     .btn-main {
       background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white;
-      border: none; padding: 12px 28px; border-radius: 12px; font-size: 15px; font-weight: 800;
+      border: none; padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 800;
       cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); transition: transform 0.1s ease;
     }
     .btn-main:active { transform: scale(0.98); }
     .btn-main:disabled { background: #94a3b8; box-shadow: none; cursor: not-allowed; }
-    .btn-sub { background: #f1f5f9; border: 1px solid #cbd5e1; color: #475569; padding: 10px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .btn-sub { background: #f1f5f9; border: 1px solid #cbd5e1; color: #475569; padding: 8px 14px; border-radius: 10px; font-size: 12px; font-weight: 600; cursor: pointer; }
     .btn-sub:hover { background: #e2e8f0; }
 
-    /* Input Steps Grid */
-    .steps-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    /* Input Grid */
+    .steps-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
     @media (min-width: 640px) { .steps-grid { grid-template-columns: repeat(2, 1fr); } }
     
     .step-card { background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 12px; }
-    .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .step-name { font-size: 14px; font-weight: 800; color: #1e293b; }
-    .badge-req { background: #dbeafe; color: #1d4ed8; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 6px; }
-    .badge-opt { background: #fef3c7; color: #b45309; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 6px; }
+    .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .step-name { font-size: 13px; font-weight: 800; color: #1e293b; }
+    .badge-req { background: #dbeafe; color: #1d4ed8; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 6px; }
+    .badge-opt { background: #fef3c7; color: #b45309; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 6px; }
 
     textarea, input, select {
-      width: 100%; padding: 8px 10px; font-size: 12px; border: 1px solid #cbd5e1; border-radius: 8px;
+      width: 100%; padding: 8px; font-size: 12px; border: 1px solid #cbd5e1; border-radius: 8px;
       outline: none; background: white; color: #334155; margin-bottom: 6px;
     }
-    textarea:focus, input:focus, select:focus { border-color: #6366f1; box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2); }
-    textarea { resize: none; height: 50px; }
+    textarea { resize: none; height: 52px; }
 
-    /* Results Table */
+    /* Table */
     .table-container { overflow-x: auto; border-radius: 10px; border: 1px solid #e2e8f0; margin-top: 10px; }
     table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 600px; text-align: left; }
     th { background: #0f766e; color: white; padding: 8px; font-weight: 700; border: 1px solid #0d9488; }
     td { padding: 8px; border: 1px solid #e2e8f0; }
 
-    /* Story Box */
-    .story-text { background: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 12px; font-size: 14px; line-height: 1.8; color: #334155; white-space: pre-line; }
+    .story-text { background: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 12px; font-size: 13.5px; line-height: 1.8; color: #334155; white-space: pre-line; }
     .prompt-box { background: #1e293b; color: #818cf8; padding: 12px; border-radius: 10px; font-family: monospace; font-size: 11px; word-break: break-all; }
 
     .hidden { display: none; }
@@ -78,15 +76,14 @@
 <body>
 
   <div class="container">
-    <!-- Header -->
     <header class="header-card">
-      <h1>🎯 靶心人公式．萬能故事 AI 學習單</h1>
-      <p>點選故事類型 ➔ 填寫核心靈感 ➔ 一鍵生成精彩全文與彩虹試算表！</p>
+      <h1>🎯 靶心人公式．全類型故事 AI 學習單</h1>
+      <p>點選 7 大故事類型 ➔ 載入範例或填寫靈感 ➔ 產出故事全文與彩虹試算表！</p>
     </header>
 
     <!-- 1. Choose Genre -->
     <section class="card">
-      <div class="card-title">📌 1. 選擇故事類型 (參考 7 大分類)</div>
+      <div class="card-title">📌 1. 選擇故事類型</div>
       <div class="genre-grid" id="genreGrid">
         <div class="genre-btn" onclick="selectGenre(this, '奇幻與科幻')">🧙‍♂️ 1. 奇幻科幻</div>
         <div class="genre-btn" onclick="selectGenre(this, '冒險與尋寶')">🗺️ 2. 冒險尋寶</div>
@@ -104,18 +101,18 @@
       <div class="steps-grid" id="stepsGrid"></div>
     </section>
 
-    <!-- 3. Actions -->
+    <!-- Actions -->
     <div class="action-bar">
       <button class="btn-main" id="aiBtn" onclick="triggerBackendAIGeneration()">✨ AI 智慧推演與生成全文</button>
-      <button class="btn-sub" onclick="loadSelectedPreset()">📙 載入類型範例</button>
+      <button class="btn-sub" onclick="loadSelectedPreset()">📙 載入該類型完整範例</button>
       <button class="btn-sub" onclick="clearAllFields()">🧹 清除內容</button>
     </div>
 
-    <!-- 4. Result Area -->
+    <!-- 3. Results -->
     <div id="resultArea" class="hidden">
       <!-- Rainbow Table -->
       <section class="card">
-        <div class="card-title" style="justify-content: space-between;">
+        <div class="card-title">
           <span>📊 3. 彩虹情緒試算表預覽</span>
           <div>
             <button class="btn-sub" onclick="openGoogleSheetsWindow()">📊 另開 Google 試算表</button>
@@ -145,7 +142,7 @@
 
       <!-- Story Full Text -->
       <section class="card">
-        <div class="card-title" style="justify-content: space-between;">
+        <div class="card-title">
           <span>📖 4. 故事全文自述</span>
           <button class="btn-sub" onclick="copyToClipboard('fullStoryText')">📋 複製全文</button>
         </div>
@@ -155,7 +152,7 @@
 
       <!-- AI Prompt -->
       <section class="card">
-        <div class="card-title" style="justify-content: space-between;">
+        <div class="card-title">
           <span>🎨 5. 寫實風格 AI 繪圖提示詞 (Prompt)</span>
           <button class="btn-sub" onclick="copyToClipboard('promptText')">📋 複製 Prompt</button>
         </div>
@@ -167,18 +164,18 @@
   </div>
 
   <script>
-    // 🔗 請貼上您最新部署、存取權限改為「所有人」的 Google Apps Script 網頁應用程式網址！
-    const GAS_API_URL = "[https://script.google.com/macros/s/AKfycbxpnWemtY7jzRo136V8H9f1DFKFc69TTJ4LS8Jilllulub28TtquE68fqHzKcT6_qDj0A/exec](https://script.google.com/macros/s/AKfycbzFCFJ7DH6hqWHUmfVq7hocVNiCQJFjqJHI_n3uy8g1lRoEv_vXUmLVMdsEThsnjKQ5/exec)";
+    // 🔗 您的 Google Apps Script 部署網址
+    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbxpnWemtY7jzRo136V8H9f1DFKFc69TTJ4LS8Jilllulub28TtquE68fqHzKcT6_qDj0A/exec";
 
     let currentGenre = "現實與劇情";
 
     const stepsData = [
-      { id: 1, name: "1. 目標 (Goal)", req: true, pE: "例如：考上慶應 / 尋找古代魔法聖杯", pF: "熱血期待，充滿決心", defS: "3" },
-      { id: 2, name: "2. 阻礙 (Obstacle)", req: true, pE: "例如：偏差值僅30 / 守護巨龍襲擊", pF: "沮喪挫折，壓力巨大", defS: "-2" },
-      { id: 3, name: "3. 努力 (Effort)", req: true, pE: "例如：苦讀至深夜 / 研讀古代魔法咒語", pF: "踏實專注，一步一腳印", defS: "1" },
+      { id: 1, name: "1. 目標 (Goal)", req: true, pE: "例如：考上慶應 / 逃出怪物牢籠", pF: "熱血期待，充滿決心", defS: "3" },
+      { id: 2, name: "2. 阻礙 (Obstacle)", req: true, pE: "例如：偏差值僅30 / 鎖鏈怪聲襲來", pF: "沮喪挫折，壓力巨大", defS: "-2" },
+      { id: 3, name: "3. 努力 (Effort)", req: true, pE: "例如：苦讀至深夜 / 躲鐵櫃觀察規律", pF: "踏實專注，一步一腳印", defS: "1" },
       { id: 4, name: "4. 結果 (Result)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "2" },
       { id: 5, name: "5. 意外 (Accident)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "-3" },
-      { id: 6, name: "6. 轉彎 (Twist)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "1" },
+      { id: 6, name: "6. 轉灣 (Twist)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "1" },
       { id: 7, name: "7. 結局 (Ending)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "3" }
     ];
 
@@ -190,6 +187,114 @@
     const emotionColorMap = {
       "3": "#059669", "2": "#10b981", "1": "#34d399", "0": "#9ca3af",
       "-1": "#f87171", "-2": "#ef4444", "-3": "#dc2626"
+    };
+
+    const fullPresets = {
+      "現實與劇情": {
+        title: "《彩加的會考逆襲：慶應奇蹟》",
+        story: "曾經我的偏差值只有 30，被班導師嘲笑絕不可能考上名校。但我不甘心就此屈服，剪去長髮、戒掉手遊，每天在補習班苦讀刷題至深夜。\n當模擬考成績大幅進步時，大考前夕卻遭遇重挫跌回 E 判定谷底，幾乎讓我崩潰絕望。所幸媽媽的陪伴與坪田老師的信件重拾了我的信仰。\n放榜那天喜獲慶應大學錄取！坐在列車上，看見坪田老師在月台上興高採烈跳躍加油的身影，淚水模糊了雙眼，這是我人生最耀眼的逆襲記錄。",
+        prompt_en: "Based on the person in the attached reference photo, a cinematic portrait of a student sitting inside a bullet train looking outside as an inspiring male tutor jumps joyfully on the platform cheering, golden hour lighting.",
+        prompt_zh: "(寫實風格：學生坐在高鐵車窗旁凝視窗外，補習班坪田老師在月台上興高採烈奮力跳躍揮手加油。)",
+        steps: [
+          { id: 1, e: "立下考上慶應義塾大學與目標高中第一志願。", f: "熱血期待，充滿決心。", s: "3" },
+          { id: 2, e: "成績墊底、偏差值僅 30，遭班導師冷眼嘲笑不看好。", f: "沮喪自卑，體會到被看輕的挫折。", s: "-2" },
+          { id: 3, e: "剪短髮戒手遊，天天在補習班苦讀刷題至深夜。", f: "踏實專注，一步一腳印。", s: "1" },
+          { id: 4, e: "模擬考成績大幅進步衝到前段班！", f: "振奮狂喜，重新建立信心。", s: "2" },
+          { id: 5, e: "考前模擬考重挫跌回 E 判定谷底，壓力過大身心交瘁。", f: "崩潰絕望，懷疑努力皆是徒勞。", s: "-3" },
+          { id: 6, e: "媽媽溫暖陪伴與老師「有志者事竟成」信件，重拾信仰。", f: "獲得力量，找回沉著自信。", s: "1" },
+          { id: 7, e: "放榜喜獲錄取！搭車時看見老師在月台上跳躍加油。", f: "感動落淚，充滿狂喜與自信。", s: "3" }
+        ]
+      },
+      "恐怖與驚悚": {
+        title: "《怪物牢籠：午夜古堡逃生錄》",
+        story: "為了尋找失蹤的同伴，我獨自闖入這座廢棄的精神病院古堡。走廊燈光驟然熄滅，身後傳來鎖鏈拖行與異形怪物低沉的咆哮聲，窒息的恐懼瞬間籠罩全身上下。\n我屏住呼吸躲在生鏽的鐵櫃中，利用手電筒觀察怪物的巡邏規律，終於拿到鑰匙卡並衝向逃生門。然而門鎖早已壞死，怪物咆哮破牆衝來，將我逼入死角！\n在命懸一線之際，我果斷砸開高壓滅火器觸發電擊暫時癱瘓怪物，奮力撞開大門奔向晨曦森林。當陽光灑在臉上那一刻，我劫後餘生般放聲痛快哭泣。",
+        prompt_en: "Based on the person in the attached reference photo, a cinematic horror movie scene of a terrified survivor bursting through heavy wooden castle doors into morning sunlight, dark spooky asylum in background.",
+        prompt_zh: "(恐怖電影風格：驚恐的倖存者撞開古堡重門奔向晨曦陽光，背景為陰森廢棄的精神病院。)",
+        steps: [
+          { id: 1, e: "在廢棄精神病院驚悚「怪物牢籠」中尋找出口順利逃生。", f: "恐懼顫抖，誓言活著離開。", s: "3" },
+          { id: 2, e: "走廊燈光熄滅，身後傳來鎖鏈拖行與異形怪物低沉咆哮。", f: "極度驚恐，心跳加速至極限。", s: "-2" },
+          { id: 3, e: "屏住呼吸躲在鐵櫃中，利用手電筒觀察怪物巡邏規律。", f: "顫抖專注，強壓內心恐懼。", s: "1" },
+          { id: 4, e: "成功拿到院長室的緊急逃生門磁卡！", f: "看見一線生機，奮力奔跑。", s: "2" },
+          { id: 5, e: "逃生門密碼鎖遭破壞，怪物破牆而出鎖定目標咆哮衝來。", f: "絕望崩潰，感受死亡逼近。", s: "-3" },
+          { id: 6, e: "砸開高壓滅火器觸發高壓電擊，暫時癱瘓怪物腿部。", f: "絕境求生，爆發極限潛能。", s: "1" },
+          { id: 7, e: "撞開大門奔向晨曦森林，背後廢棄古堡歸於平靜！", f: "劫後餘生，放聲大哭慶幸。", s: "3" }
+        ]
+      },
+      "奇幻與科幻": {
+        title: "《星域符文：破滅與曙光》",
+        story: "為了拯救即將衰亡的母星，我駕駛探測船降落於星系邊緣的古代魔法遺跡。然而古老守護者釋放出高階黑魔法與反重力能量罩，阻斷了一切深入的可能。\n我結合現代微晶片與古代詠唱咒語進行共振突破，終於讓符文釋放出璀璨藍光。不料遺跡核心突發自爆機制，撕裂空間的反物質能量幾乎將一切吞噬！\n關鍵時刻，我果斷將殘存能量注入符文傳送陣，成功穿越時空傳送門。當船隻安全降落於新世界，手中聖物散發著拯救文明的璀璨光芒。",
+        prompt_en: "Based on the person in the attached reference photo, a photorealistic sci-fi cinematic scene of an explorer holding a glowing blue rune crystal in an ancient alien temple with glowing energy portals.",
+        prompt_zh: "(科幻電影風格：探險家在古老外星神殿中高舉發光的藍色符文水晶，背景為旋轉的能量傳送門。)",
+        steps: [
+          { id: 1, e: "前往星系邊緣的魔法遺跡解開失落的元素符文法則。", f: "震撼好奇，充滿探索壯志。", s: "3" },
+          { id: 2, e: "古老守護者釋放高階黑魔法與反重力能量防護罩阻擋。", f: "受挫驚恐，陷入困局。", s: "-2" },
+          { id: 3, e: "結合現代科技微晶片與古代詠唱咒語進行共振突破。", f: "專注冷靜，奮力嘗試。", s: "1" },
+          { id: 4, e: "防護罩破裂，符文成功解開並釋放出熾熱藍光！", f: "備受鼓舞，看見希望。", s: "2" },
+          { id: 5, e: "遺跡核心突觸發自爆機制，反物質能量迅速過載撕裂空間。", f: "絕望萬分，生死一瞬。", s: "-3" },
+          { id: 6, e: "發現符文暗藏的時空傳送門，果斷引導能量注入傳送陣。", f: "絕境反擊，臨危不亂。", s: "1" },
+          { id: 7, e: "安全降落新世界，手中聖物散發著拯救文明的光芒！", f: "狂喜激動，浩瀚壯舉成就。", s: "3" }
+        ]
+      },
+      "喜劇與幽默": {
+        title: "《極道家政王：黑道大哥的圍裙逆襲》",
+        story: "堂堂黑道大哥因為賭局輸了，必須挑戰擔任全職家政夫一天！穿上粉紅圍裙配墨鏡打掃時，竟遇到了會咬人且超頑固的廚房油污，甚至還被路過的小學生指指點點嘲笑。\n我拿出幫派砍人級別的殺氣，用超細刷子與高壓蒸氣槍對油污開戰，終於讓廚房閃閃發光！沒想到烤蛋糕時失手把地獄辣椒粉當成可可粉，瞬間變成了暗黑料理。\n我臨危不亂將它改造成「黑道魂特調辣味麻糬」，沒想到鄰居太太們瘋狂排隊搶購，讓我一舉成為社區最強的明星家政王！",
+        prompt_en: "Based on the person in the attached reference photo, a humorous funny movie scene of a tough gangster wearing a pink apron and sunglasses in a sparkling clean kitchen holding a giant spatula.",
+        prompt_zh: "(喜劇風格：面相凶狠的黑道大哥戴著墨鏡、穿著粉紅圍裙在閃閃發光的廚房裡拿著鍋鏟。)",
+        steps: [
+          { id: 1, e: "凶狠黑道大哥因為賭局輸了，必須挑戰擔任全職家政夫一天。", f: "滿臉不爽但充滿極度自信。", s: "3" },
+          { id: 2, e: "遇到會咬人且超頑固的油污，用圍裙配墨鏡打掃被小學生嘲笑。", f: "崩潰尷尬，極度傻眼。", s: "-2" },
+          { id: 3, e: "拿出殺氣用超細小刷子與高壓蒸氣槍對油污開戰。", f: "殺氣騰騰，認真打掃。", s: "1" },
+          { id: 4, e: "廚房被清潔得閃閃發光，宛如五星級新飯店！", f: "成就感爆棚，爽快無比。", s: "2" },
+          { id: 5, e: "準備烤蛋糕時誤把地獄特級辣椒粉當成可可粉撒滿蛋糕。", f: "傻眼絕望，表情徹底失控。", s: "-3" },
+          { id: 6, e: "臨危不亂將辣味蛋糕改造成爆款「黑道魂暗黑特調辣味麻糬」。", f: "展現創意，反敗為勝。", s: "1" },
+          { id: 7, e: "鄰居太太們瘋狂排隊搶購，黑道大哥成為社區最強明星家政王！", f: "搞笑歡樂，全場爆笑好評。", s: "3" }
+        ]
+      },
+      "推理與懸疑": {
+        title: "《雙重密室：古堡懸案破曉之時》",
+        story: "為了洗清被害者的冤屈，我接下了這宗看似不可能破解的古堡密室失蹤案。現場所有痕跡皆被精心毀滅，嫌疑人更擁有無懈可擊的不在場證明。\n我用放大鏡勘驗牆上油畫的積塵與微小光影差異，終在機關內發現關鍵的隱形墨水密信！但在開庭前夕，關鍵證人卻突然遭神秘黑影襲擊重傷昏迷。\n我在懷錶機芯內找到了兇手的特徵指紋，並破解了雙重心理陷阱。在警局大廳我當眾拆穿真兇面具，密室真相大白，正義終得伸張。",
+        prompt_en: "Based on the person in the attached reference photo, a cinematic detective film scene of a sharp detective holding a magnifying glass inspecting a secret compartment in a vintage dark library.",
+        prompt_zh: "(推理電影風格：敏銳的偵探在古典暗色圖書館中持放大鏡勘驗牆壁暗格。)",
+        steps: [
+          { id: 1, e: "偵破古堡連環密室失蹤案，為被害者洗清冤屈並還原真相。", f: "冷靜敏銳，尋求正義。", s: "3" },
+          { id: 2, e: "現場證據遭毀滅，嫌疑人皆擁有完美的不在場證明。", f: "陷入僵局，毫無頭緒。", s: "-2" },
+          { id: 3, e: "用放大鏡重新勘驗現場積塵與牆上油畫的微小光影差異。", f: "細心嚴謹，不放過蛛絲馬跡。", s: "1" },
+          { id: 4, e: "發現暗門機制與一封藏在機關內的關鍵隱形墨水密信！", f: "眼前一亮，破解第一重謎團。", s: "2" },
+          { id: 5, e: "關鍵證人在開庭前夕遭神秘黑影襲擊昏迷，線索中斷。", f: "挫敗沉痛，感覺對手陰險。", s: "-3" },
+          { id: 6, e: "在懷錶機芯內找到真正的兇手指紋與雙重密室心理陷阱設計。", f: "自信反擊，鎖定真兇。", s: "1" },
+          { id: 7, e: "警局大廳公開拆穿真兇面具，密室真相大白，正義得到伸張！", f: "充滿成就感，榮耀落幕。", s: "3" }
+        ]
+      },
+      "浪漫與愛情": {
+        title: "《月光下的約定：跨越時空的相擁》",
+        story: "在大學畢業前夕，我鼓起勇氣向暗戀三年的學姐坦承心意。然而她收到了出國深造的 Offer，因害怕遠距離愛情的無奈而暫時封閉了心扉。\n我選擇不給她負擔，親手製作了一本紀錄三年共同回憶的相冊。學姐在機場被這份深情打動，我們許下了三年後在東京塔重逢的約定。\n約定當天突降狂風暴雨導致航班延誤，手機通訊全斷。我憑著記憶頂著風雪奔向塔下，發現一個熟悉的身影正撐著傘等候。漫天雪花下我們深深相擁，跨越時間終成眷屬。",
+        prompt_en: "Based on the person in the attached reference photo, a romantic movie scene of two lovers embracing under an umbrella in snowy night with Tokyo Tower glowing in background.",
+        prompt_zh: "(浪漫電影風格：下雪的夜晚，兩位戀人在東京塔璀璨霓虹背景下撐傘深深相擁。)",
+        steps: [
+          { id: 1, e: "在大學畢業前夕，向暗戀三年的社團學姐勇敢告白。", f: "心跳加速，既緊張又期待。", s: "3" },
+          { id: 2, e: "學姐收到出國深造 Offer，決定暫時封閉心扉不敢承諾。", f: "心碎沮喪，感到現實無奈。", s: "-2" },
+          { id: 3, e: "不給她壓力，親手製作一本記載三年共同回憶的相冊與祝福信。", f: "溫柔堅定，默默守護。", s: "1" },
+          { id: 4, e: "學姐在機場被相冊深情打動，許下三年後東京塔重逢約定。", f: "滿懷希望，願意為愛等待。", s: "2" },
+          { id: 5, e: "約定之日突逢大雪航班延誤，手機訊號中斷無法聯繫。", f: "焦慮萬分，害怕擦身而過。", s: "-3" },
+          { id: 6, e: "頂著風雪奔向東京塔下，發現熟悉的身影正撐傘等候。", f: "眼眶紅潤，內心湧現感動。", s: "1" },
+          { id: 7, e: "在漫天雪花與東京塔霓虹下深深相擁，跨越距離終成眷屬！", f: "狂喜幸福，永遠珍藏這一刻。", s: "3" }
+        ]
+      },
+      "冒險與尋寶": {
+        title: "《太陽神面具：迷霧瀑布探險記》",
+        story: "為了尋找消失百年的阿茲特克黃金面具，我獨自踏入危險重重的迷霧森林。不料踏入沼澤區突遭巨蟒包圍，指南針與地圖更落入泥流失落。\n我靠著星宿辨識方位並製作防蛇薰香，終於穿過沼澤，發現了隱藏在瀑布後方的黃金神廟！然而取下面具時觸發了流沙 Trap，神廟開始劇烈崩塌。\n我運用探險繩索抓住石柱飛躍，順著瀑布水流躍入深潭死裡逃生。當我高舉黃金面具站在陽光下，那一刻我成為了歷史上記錄的傳奇探險家。",
+        prompt_en: "Based on the person in the attached reference photo, a photorealistic adventure movie scene of an explorer emerging from a waterfall cave holding a golden ancient sun mask into bright jungle sunlight.",
+        prompt_zh: "(冒險電影風格：探險家從瀑布水簾洞中走出，高舉金光閃閃的太陽神面具站在熱帶叢林陽光下。)",
+        steps: [
+          { id: 1, e: "深入迷霧森林尋找消失百年的太陽神阿茲特克黃金面具。", f: "勇敢熱血，準備踏上旅程。", s: "3" },
+          { id: 2, e: "踏入沼澤區突遭巨型沼澤蟒蛇包圍，地圖與指南針掉入泥流。", f: "驚恐焦慮，失去方向。", s: "-2" },
+          { id: 3, e: "靠星宿位置辨識方位，並利用周遭植物製作防蛇薰香。", f: "堅韌踏實，不屈不撓。", s: "1" },
+          { id: 4, e: "穿過沼澤，成功發現隱藏在瀑布後方的黃金神廟入口！", f: "振奮狂喜，曙光乍現。", s: "2" },
+          { id: 5, e: "取走面具時觸發地底流沙 traps，神廟頂部開始坍塌崩落。", f: "命懸一線，極度絕望。", s: "-3" },
+          { id: 6, e: "運用探險繩索抓住石柱飛躍，順著瀑布水流躍入深潭。", f: "死裡逃生，展現極限勇氣。", s: "1" },
+          { id: 7, e: "高舉黃金面具站在陽光下，完成歷史性偉大探險冒險！", f: "歡呼狂喜，成為傳奇探險家。", s: "3" }
+        ]
+      }
     };
 
     function renderForm() {
@@ -217,32 +322,23 @@
       currentGenre = genre;
     }
 
-    const presets = {
-      "現實與劇情": [
-        { id: 1, e: "立下考上慶應大學與目標高中第一志願。", f: "熱血期待，充滿決心。", s: "3" },
-        { id: 2, e: "成績墊底、偏差值僅 30，遭班導師冷眼嘲笑不看好。", f: "沮喪自卑，體會到被看輕的挫折。", s: "-2" },
-        { id: 3, e: "剪短髮戒手遊，天天在補習班苦讀刷題至深夜。", f: "踏實專注，一步一腳印。", s: "1" }
-      ],
-      "奇幻與科幻": [
-        { id: 1, e: "前往星系邊緣的魔法遺跡解開失落的元素符文法則。", f: "震撼好奇，充滿探索壯志。", s: "3" },
-        { id: 2, e: "古老守護者釋放高階黑魔法與反重力能量防護罩阻擋。", f: "受挫驚恐，陷入困局。", s: "-2" },
-        { id: 3, e: "結合現代科技微晶片與古代詠唱咒語進行共振突破。", f: "專注冷靜，奮力嘗試。", s: "1" }
-      ],
-      "喜劇與幽默": [
-        { id: 1, e: "凶狠黑道大哥因為賭局輸了，必須挑戰擔任全職家政夫一天。", f: "滿臉不爽但充滿極度自信。", s: "3" },
-        { id: 2, e: "遇到會咬人且超頑固的油污，用圍裙配墨鏡打掃被小學生嘲笑。", f: "崩潰尷尬，極度傻眼。", s: "-2" },
-        { id: 3, e: "拿出殺氣用超細小刷子與高壓蒸氣槍對油污開戰。", f: "殺氣騰騰，認真打掃。", s: "1" }
-      ]
-    };
-
     function loadSelectedPreset() {
-      const data = presets[currentGenre] || presets["現實與劇情"];
-      data.forEach(item => {
+      const p = fullPresets[currentGenre] || fullPresets["現實與劇情"];
+      
+      p.steps.forEach(item => {
         document.getElementById(`event_${item.id}`).value = item.e;
         document.getElementById(`feeling_${item.id}`).value = item.f;
         document.getElementById(`scale_${item.id}`).value = item.s;
       });
-      alert(`已載入【${currentGenre}】預設範例！`);
+
+      document.getElementById('storyTitle').innerText = p.title;
+      document.getElementById('fullStoryText').innerText = p.story;
+      document.getElementById('promptText').innerText = p.prompt_en;
+      document.getElementById('promptTranslation').innerText = p.prompt_zh;
+
+      renderRainbowGrid();
+      document.getElementById('resultArea').classList.remove('hidden');
+      document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
     }
 
     async function triggerBackendAIGeneration() {
@@ -298,7 +394,7 @@
         alert(`✨ AI 成功為您推演【${currentGenre}】精采全文！`);
 
       } catch (err) {
-        alert("❌ 生成失敗：\n" + err.message + "\n\n💡 請檢查 Google Apps Script 部署權限是否已設定為『所有人』！");
+        alert("❌ 生成失敗：\n" + err.message + "\n\n💡 請確認 GAS 部署存取權限已改為『所有人』，且重新發布為新版本！");
       } finally {
         btn.disabled = false;
         btn.innerText = "✨ AI 智慧推演與生成全文";
