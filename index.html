@@ -165,7 +165,7 @@
 
   <script>
     // 🔗 您的 Google Apps Script 部署網址
-    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbxpnWemtY7jzRo136V8H9f1DFKFc69TTJ4LS8Jilllulub28TtquE68fqHzKcT6_qDj0A/exec";
+    const GAS_API_URL = "[https://script.google.com/macros/s/AKfycbxpnWemtY7jzRo136V8H9f1DFKFc69TTJ4LS8Jilllulub28TtquE68fqHzKcT6_qDj0A/exec](https://script.google.com/macros/s/AKfycbxpnWemtY7jzRo136V8H9f1DFKFc69TTJ4LS8Jilllulub28TtquE68fqHzKcT6_qDj0A/exec)";
 
     let currentGenre = "現實與劇情";
 
@@ -175,7 +175,7 @@
       { id: 3, name: "3. 努力 (Effort)", req: true, pE: "例如：苦讀至深夜 / 躲鐵櫃觀察規律", pF: "踏實專注，一步一腳印", defS: "1" },
       { id: 4, name: "4. 結果 (Result)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "2" },
       { id: 5, name: "5. 意外 (Accident)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "-3" },
-      { id: 6, name: "6. 轉灣 (Twist)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "1" },
+      { id: 6, name: "6. 轉彎 (Twist)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "1" },
       { id: 7, name: "7. 結局 (Ending)", req: false, pE: "可填寫或由 AI 動態推演創作", pF: "內心感受 (選填)", defS: "3" }
     ];
 
@@ -207,7 +207,7 @@
       },
       "恐怖與驚悚": {
         title: "《怪物牢籠：午夜古堡逃生錄》",
-        story: "為了尋找失蹤的同伴，我獨自闖入這座廢棄的精神病院古堡。走廊燈光驟然熄滅，身後傳來鎖鏈拖行與異形怪物低沉的咆哮聲，窒息的恐懼瞬間籠罩全身上下。\n我屏住呼吸躲在生鏽的鐵櫃中，利用手電筒觀察怪物的巡邏規律，終於拿到鑰匙卡並衝向逃生門。然而門鎖早已壞死，怪物咆哮破牆衝來，將我逼入死角！\n在命懸一線之際，我果斷砸開高壓滅火器觸發電擊暫時癱瘓怪物，奮力撞開大門奔向晨曦森林。當陽光灑在臉上那一刻，我劫後餘生般放聲痛快哭泣。",
+        story: "為了尋找失蹤的同伴，我獨自闖入這座廢棄的精神病院古堡。走廊燈光驟然熄滅，身後傳來鎖鏈拖行與異形怪物低沉的咆哮聲，窒息的恐懼瞬間籠罩全身上下。\n我屏住呼吸躲在生鏽的鐵櫃中，利用手電筒觀察怪物的巡邏規律，終於拿到鑰匙卡並衝向逃生門。然而門鎖早已壞死，怪物咆哮破牆衝來，將我逼入死角！\n在命懸一線之際，我果斷砸開高壓滅火器觸發電擊暫時癱瘓怪物，奮力撞開大門奔向晨曦森林。當陽光灑在臉上那一刻，我劫後餘生般痛快哭泣。",
         prompt_en: "Based on the person in the attached reference photo, a cinematic horror movie scene of a terrified survivor bursting through heavy wooden castle doors into morning sunlight, dark spooky asylum in background.",
         prompt_zh: "(恐怖電影風格：驚恐的倖存者撞開古堡重門奔向晨曦陽光，背景為陰森廢棄的精神病院。)",
         steps: [
@@ -222,7 +222,7 @@
       },
       "奇幻與科幻": {
         title: "《星域符文：破滅與曙光》",
-        story: "為了拯救即將衰亡的母星，我駕駛探測船降落於星系邊緣的古代魔法遺跡。然而古老守護者釋放出高階黑魔法與反重力能量罩，阻斷了一切深入的可能。\n我結合現代微晶片與古代詠唱咒語進行共振突破，終於讓符文釋放出璀璨藍光。不料遺跡核心突發自爆機制，撕裂空間的反物質能量幾乎將一切吞噬！\n關鍵時刻，我果斷將殘存能量注入符文傳送陣，成功穿越時空傳送門。當船隻安全降落於新世界，手中聖物散發著拯救文明的璀璨光芒。",
+        story: "為了拯救即將衰亡的母星，我駕駛探測船降落於星系邊緣的古代魔法遺跡。然而古老守護者釋放出高階黑魔法與反重力能量罩，阻斷了一切深入的可能。\n我結合現代微晶片與古代詠唱咒語進行共振突破，終於讓符文釋放出璀璨藍光。不料遺跡核心突發自爆機制，撕裂空間的反物質能量幾乎將一切吞噬！\n關鍵時刻，我果斷將殘存能量注入符文傳送陣，成功穿越時空傳送門。當船隻安全降落於新世界，手中聖物散發著拯救文明的光芒。",
         prompt_en: "Based on the person in the attached reference photo, a photorealistic sci-fi cinematic scene of an explorer holding a glowing blue rune crystal in an ancient alien temple with glowing energy portals.",
         prompt_zh: "(科幻電影風格：探險家在古老外星神殿中高舉發光的藍色符文水晶，背景為旋轉的能量傳送門。)",
         steps: [
@@ -394,7 +394,7 @@
         alert(`✨ AI 成功為您推演【${currentGenre}】精采全文！`);
 
       } catch (err) {
-        alert("❌ 生成失敗：\n" + err.message + "\n\n💡 請確認 GAS 部署存取權限已改為『所有人』，且重新發布為新版本！");
+        alert("❌ 生成失敗：\n" + err.message + "\n\n💡 請確認 Apps Script 已點擊『部署 ➔ 管理部署作業 ➔ 編輯 ➔ 建立新版本』！");
       } finally {
         btn.disabled = false;
         btn.innerText = "✨ AI 智慧推演與生成全文";
